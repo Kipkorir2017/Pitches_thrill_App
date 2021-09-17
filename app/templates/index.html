@@ -1,13 +1,23 @@
 
 {% extends 'base.html'%}
 {% import 'macros.html' as macro%}
+{%block styles%}
+{{super()}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+{%endblock%}
 {% block content%}
 <div class="container">
     <div>
-        <h2 style="text-align:center">{{title}}</h2>
-        <p style="text-align:center">Welcome to the pitches Thrills, you have only 60 seconds to write your new pitch to
-            impress users, users will have to vote your pitch and also leaving a comments.</p>
+        <h2 style="text-align:center;font-family: 'Open Sans', sans-serif;font-size:30px;font-weight: 900;color:tomato">{{title}}</h2>
+        <p style="text-align:center;font-family: 'Open Sans', sans-serif;font-size:20px">Welcome to the pitches Thrills, you have only 60 seconds to write your new pitch to
+            impress users, users will have to vote your pitch and also leaving  comments.</p>
+    </div> <br>
+    <div>
+        <button type="button" class="btn btn-success" style="  margin: 0;position: absolute;top: 40%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);font-family: 'Open Sans', sans-serif;" >Add new pitch</button>
     </div>
+
 </div>
 
 
