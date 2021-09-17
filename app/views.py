@@ -16,7 +16,7 @@ def sports():
     '''
     view function to display sports pitches
     '''
-    sports_title ='sports'
+    sports_title ='sports Pitches'
     return render_template('pitches/sports.html',title=sports_title)
 
 @app.route('/category/business')
@@ -24,7 +24,7 @@ def business():
     '''
     view function to display business pitches
     '''
-    business_title='Business'
+    business_title='Business Pitches'
     return render_template('pitches/business.html',title=business_title)
 
 
@@ -33,7 +33,7 @@ def interview():
     '''
     view function to display interview pitches
     '''
-    interview_title ='Interview'
+    interview_title ='Interview Pitches'
     return render_template('pitches/interview.html',title=interview_title)
 
 @app.route('/category/love')
@@ -41,7 +41,7 @@ def love():
     '''
     view function to display love pitches
     '''
-    love_title='Love'
+    love_title='Love Pitches'
     return render_template('pitches/love.html',title=love_title)
 
 
@@ -50,7 +50,7 @@ def study():
     '''
     view function to display study pitches
     '''
-    study_title='Study'
+    study_title='Study Pitches'
     return render_template('pitches/study.html',title=study_title)
 
 
@@ -59,5 +59,5 @@ def politics():
     '''
     view function to display business pitches
     '''
-    politics_title = 'Politics'
+    politics_title = 'Politics Pitches'
     return render_template('pitches/politics.html',title=politics_title)
