@@ -1,6 +1,14 @@
-{% extends 'base.html'%}
 
-<div>
-    <h2>{{title}}</h2>
-    <p>Welcome to the pitches Thrills, you have only 6o seconds to write your new pitches or vote the pitches that has already been post</p>
+{% extends 'base.html'%}
+{% import 'macros.html' as macro%}
+{% block content%}
+<div class="container">
+    <div>
+        <h2 style="text-align:center">{{title}}</h2>
+        <p style="text-align:center">Welcome to the pitches Thrills, you have only 60 seconds to write your new pitch to
+            impress users, users will have to vote your pitch and also leaving a comments.</p>
+    </div>
 </div>
+
+
+{%endblock%}

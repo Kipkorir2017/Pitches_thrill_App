@@ -5,7 +5,6 @@ from flask_bootstrap import Bootstrap
 #initializing application
 app = Flask(__name__)
 
-
 # Setting up configuration
 app.config.from_object(DevConfig)
 
