@@ -90,3 +90,4 @@ def politics():
     '''
     politics_title = 'Politics Pitches'
     return render_template('pitches/politics.html',title=politics_title)
+

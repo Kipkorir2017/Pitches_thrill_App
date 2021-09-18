@@ -8,6 +8,9 @@ def create_app(config_name):
 
     app = Flask(__name__)
 
+    #default value during deployment
+    app.secret_key='I LOVE PYTHON'
+
     # Creating the app configurations
     app.config.from_object(config_options[config_name])
 
