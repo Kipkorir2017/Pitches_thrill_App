@@ -23,3 +23,7 @@ class CommentForm(FlaskForm):
     """
     opinion = TextAreaField('COMMENT ON PITCH')
     submit = SubmitField('SUBMIT')
+
+class UpdateProfile(FlaskForm):
+    bio = TextAreaField('Tell us about you.',validators = [Required()])
+    submit = SubmitField('Submit')
