@@ -4,7 +4,7 @@ from . import main
 from wtforms import form
 from .forms import PitchesForm
 from ..models import Pitch
-
+from flask_login import login_required
 
 #views
 @main.route('/')
@@ -17,7 +17,7 @@ def index():
 
 
 @main.route('/pitch/newpitch', methods=['POST', 'GET'])
-
+@login_required
 def new_pitch():
     form = PitchesForm()
     if form.validate_on_submit():
