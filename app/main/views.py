@@ -1,9 +1,13 @@
-from flask import render_template
-from app import app
+from flask import render_template,redirect, url_for
+# from app import app
+from . import main
+from wtforms import form
+from .forms import PitchesForm
+from ..models import Pitch,User
 
 
 #views
-@app.route('/')
+@main.route('/')
 def index():
     '''
     View root page function that returns the index page and its data
@@ -11,7 +15,32 @@ def index():
     title='Pitches Thrills'
     return render_template('index.html',title=title)
 
-@app.route('/category/sports')
+
+@main.route('/pitch/newpitch', methods=['POST', 'GET'])
+
+def new_pitch():
+    form = PitchesForm()
+    if form.validate_on_submit():
+        title = form.pitch_title.data
+        category = form.pitch_category.data
+        newPitch = form.pitch_comment.data
+
+        #update pitch instance
+        new_pitch = Pitch(title=title,
+                          category=category,
+                          comment=newPitch)
+                          
+
+        #save pitch
+        new_pitch.save_pitch()
+        return redirect(url_for('.index'))
+
+    title = 'Add New pitch'
+    return render_template('pitches.html', title=title, pitchesform=form)
+
+
+
+@main.route('/category/sports')
 def sports():
     '''
     view function to display sports pitches
@@ -19,7 +48,7 @@ def sports():
     sports_title ='sports Pitches'
     return render_template('pitches/sports.html',title=sports_title)
 
-@app.route('/category/business')
+@main.route('/category/business')
 def business():
     '''
     view function to display business pitches
@@ -28,7 +57,7 @@ def business():
     return render_template('pitches/business.html',title=business_title)
 
 
-@app.route('/category/interview')
+@main.route('/category/interview')
 def interview():
     '''
     view function to display interview pitches
@@ -36,7 +65,7 @@ def interview():
     interview_title ='Interview Pitches'
     return render_template('pitches/interview.html',title=interview_title)
 
-@app.route('/category/love')
+@main.route('/category/love')
 def love():
     '''
     view function to display love pitches
@@ -45,7 +74,7 @@ def love():
     return render_template('pitches/love.html',title=love_title)
 
 
-@app.route('/category/study')
+@main.route('/category/study')
 def study():
     '''
     view function to display study pitches
@@ -54,7 +83,7 @@ def study():
     return render_template('pitches/study.html',title=study_title)
 
 
-@app.route('/category/politics')
+@main.route('/category/politics')
 def politics():
     '''
     view function to display business pitches
