@@ -15,3 +15,11 @@ class PitchesForm(FlaskForm):
                                           ('study','study')], validators=[Required()])
     pitch_comment = TextAreaField('New Pitch')
     submit = SubmitField('Submit')
+
+
+class CommentForm(FlaskForm):
+    """
+    form for creating a pitch comment
+    """
+    opinion = TextAreaField('COMMENT ON PITCH')
+    submit = SubmitField('SUBMIT')
