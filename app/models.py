@@ -14,6 +14,7 @@ class Pitch:
         self.pitch_title=pitch_title
         self.postedOn=postedOn
         
+        
     def save_pitch(self):
         Pitch.all_pitches.append(self)
 

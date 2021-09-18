@@ -1,26 +1,26 @@
 {% macro displayPitches(pitches_list) %}
 
     {% for pitch in pitches_list %}
-    <div class=" col-lg-4 movie-card">
+    <div class="movie-card">
         <div class="card col-sm mt-2">
-            <div class="well well-lg p-3" style="text-align: left;">
+            <div class="well well-lg p-5" style="text-align: left;">
                 <h3 style="font-weight: 900;">{{pitch.pitch_title}}</h3>
-                <p>{{pitch.pitch_comment|truncate}}</p>
-                <p style="font-weight: 900; "><span>Posted on: date
+                <p>{{pitch.pitch_comment|truncate(70)}}</p>
+                <p style="font-weight: 900; "><span>Posted on:{{pitch.postedOn.date}} by
                          </span> <span>
                     </span>
                 </p>
     
                 <div class="row">
-                    <div class="btn-group col-md-6">
-                        <a class="btn btn-info d-flex btn-center -center"
+                    <div class="btn-group col-md-8">
+                        <a class="btn btn-success d-flex btn-center -center"
                             href="">
                             
-                        </a>
-                        <a class="btn btn btn-warning d-flex btn-center -center"
+                        </a> 
+                        <a class="btn btn btn-primary d-flex btn-center -center"
                             href="">
                             
-                        </a>
+                        </a> <br>
                     </div>
                     <div class=col-md-6>
                         <a href="" class="btn btn-default btn-center -center">
