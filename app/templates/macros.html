@@ -1,11 +1,11 @@
-{% macro displayPitchesList(pitches_list) %}
+{% macro displayPitches(pitches_list) %}
 
     {% for pitch in pitches_list %}
     <div class=" col-lg-4 movie-card">
         <div class="card col-sm mt-2">
             <div class="well well-lg p-3" style="text-align: left;">
-                <h3 style="font-weight: 900;"></h3>
-                <p></p>
+                <h3 style="font-weight: 900;">{{pitch.pitch_title}}</h3>
+                <p>{{pitch.pitch_comment|truncate}}</p>
                 <p style="font-weight: 900; "><span>Posted on: date
                          </span> <span>
                     </span>
