@@ -1,4 +1,6 @@
 from . import db
+from datetime import datetime
+
 
 class User(db.Model):
     """ 
@@ -15,13 +17,28 @@ class User(db.Model):
 
 
 
-class Pitch:
+class Pitch(db.Model):
+    """
+    List of pitches  
+    """
 
-    all_pitches=[]
-    def __init__(self,pitch_id,pitch_title,postedOn):
-        self.pitch_id=pitch_id
-        self.pitch_title=pitch_title
-        self.postedOn=postedOn
+    __tablename__ = 'pitches'
+
+    id = db.Column(db.Integer, primary_key=True)
+    pitch_id = db.Column(db.Integer)
+    pitch_title = db.Column(db.String)
+    pitch_category = db.Column(db.String)
+    pitch_comment = db.Column(db.String)
+    posted = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+
+
+    # all_pitches=[]
+    # def __init__(self,pitch_id,pitch_title,postedOn):
+    #     self.pitch_id=pitch_id
+    #     self.pitch_title=pitch_title
+    #     self.postedOn=postedOn
         
         
     def save_pitch(self):
