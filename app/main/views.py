@@ -1,9 +1,9 @@
-from flask import render_template,redirect, url_for
+from flask import render_template,redirect, url_for,abort
 # from app import app
 from . import main
 from wtforms import form
 from .forms import PitchesForm
-from ..models import Pitch
+from ..models import Pitch,User
 from flask_login import login_required
 
 #views
@@ -15,6 +15,15 @@ def index():
     title='Pitches Thrills'
     return render_template('index.html',title=title)
 
+
+@main.route('/user/<uname>')
+def profile(uname):
+    user = User.query.filter_by(username = uname).first()
+
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user = user)
 
 @main.route('/pitch/newpitch', methods=['POST', 'GET'])
 @login_required
