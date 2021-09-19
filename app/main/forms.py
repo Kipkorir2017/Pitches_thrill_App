@@ -17,9 +17,17 @@ class PitchesForm(FlaskForm):
     submit = SubmitField('Submit')
 
 
+class CategoryForm(FlaskForm):
+    """
+    classify a pitch
+    """
+    name = StringField('Category Name', validators=[Required()])
+    submit = SubmitField('Create')
+
+
 class CommentForm(FlaskForm):
     """
-    form for creating a pitch comment
+        form for creating a pitch comment
     """
     opinion = TextAreaField('COMMENT ON PITCH')
     submit = SubmitField('SUBMIT')

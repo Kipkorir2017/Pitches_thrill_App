@@ -3,19 +3,20 @@
 {% import 'macros.html' as macro %}
 
 {%block content%}
-<h3 class="text-center text-uppercase" style="color:Teal">Pitch comments</h3>
+<h3 class="text-center text-uppercase" style="color:#cf3a15;font-family: 'Open Sans', sans-serif;">Comments</h3>
 
 <div class="container">
     <hr>
     <div class="row">
         <div class="col-md-6">
-            {{macro.displayPitches(pitche)}}
+            {{macro.displayPitches(pitchethrills)}}
             <h3 class="pt-3"><b>{{pitch.pitch_title}}</b></h3>
             <hr>
             <p>{{pitch.pitch_comment}}</p>
             <p><b>Posted on: </b>{{pitch.posted.strftime('%d.%m.%Y')}}</p>
+            
             <div class="btn-group">
-                <button type="button" style="border: none;" class=" btn btn-info d-flex">
+                <button type="button" style="border: none;" class=" btn btn-primary d-flex">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-hand-thumbs-up" viewBox="0 0 16 16" value="">
@@ -25,7 +26,7 @@
                     </svg>
                     {{pitch.likes}}
                 </button>
-                <button type="button" style="border: none;" class="btn btn-warning d-flex">
+                <button type="button" style="border: none;" class="btn btn-danger d-flex">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-hand-thumbs-down" viewBox="0 0 16 16">
                         <path
@@ -41,7 +42,7 @@
             <h3>Display comments</h3>
             {{macro.displayComments(comments)}}
         </div>
-        <div class="col-md-2"></div>
+
     </div>
 </div>
 

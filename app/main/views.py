@@ -2,7 +2,7 @@ from flask import render_template,redirect,request, url_for,abort
 # from app import app
 from . import main
 from wtforms import form
-from .forms import PitchesForm,UpdateProfile
+from .forms import PitchesForm,UpdateProfile,CommentForm
 from ..models import Pitch,User, Comments
 from flask_login import login_required,current_user
 from .. import db,photos
@@ -70,13 +70,13 @@ def new_pitch():
     if form.validate_on_submit():
         title = form.pitch_title.data
         category = form.pitch_category.data
-        comment = form.pitch_comment.data
+        newpitch = form.pitch_comment.data
        
 
         #update pitch instance
         new_pitch = Pitch(pitch_title=title,
                           pitch_category=category,
-                          pitch_comment=comment,
+                          pitch_comment=newpitch,
                           user=current_user)
                           
                           
@@ -147,3 +147,54 @@ def politics():
     politics_title = 'Politics Pitches'
     return render_template('pitches/politics.html',title=politics_title,politics_pitch=pitches)
 
+likes = 1
+dislikes = 1
+@main.route('/comment/<int:id>', methods=['POST', 'GET'])
+@login_required
+def post_comment(id):
+
+    pitche = Pitch.getPitchId(id)
+    comments = Comments.get_comments(id)
+   
+
+    if request.args.get("like"):
+        pitch = Pitch.query.filter_by(user_id=current_user.id)
+        pitch.likes += 1
+        print(pitch.likes)
+
+        db.session.add(pitch.likes)
+        db.session.commit()
+        return str(pitch.likes)
+
+    elif request.args.get("dislike"):
+        pitche.dislikes += 1
+
+        db.session.add()
+        db.session.commit()
+
+        return redirect(".comment")
+
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = form.opinion.data
+
+        new_comment = Comments(opinion=comment,user_id=current_user.id,pitches_id=pitche.id)
+
+        new_comment.save_comment()
+
+        return redirect(url_for('main.post_comment', id=pitche.id))
+    return render_template('comment.html',commentform=form,comments=comments,pitch=pitche)
+
+@main.route('/pitch/upvote/<int:id>&<int:vote>')
+@login_required
+def vote(id, vote):
+    counter = 0
+
+    pitchethrill = Pitch.getPitchId(id)
+    # vote = .get_vote(id)
+    counter += 1
+    print(counter)
+    new_vote = Pitch(likes=counter)
+    new_vote.save_vote()
+
+    return str(new_vote)
