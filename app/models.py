@@ -19,7 +19,7 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(255),unique = True,index = True)
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
-    password_hash = db.Column(db.String(255))
+    pass_hash = db.Column(db.String(255))
 
     @property
     def password(self):
@@ -31,7 +31,7 @@ class User(UserMixin,db.Model):
 
 
     def verify_password(self,password):
-        return check_password_hash(self.password_hash,password)
+        return check_password_hash(self.pass_hash,password)
     
     def __repr__(self):
         return f'User {self.username}'
@@ -64,25 +64,48 @@ class Pitch(db.Model):
         
         
     def save_pitch(self):
-        Pitch.all_pitches.append(self)
-
+        db.session.add(self)
+        db.session.commit()
     @classmethod
     def clear_pitches(cls):
         Pitch.all_pitches.clear()
 
     @classmethod
-    def get_pitches(cls,pitch_title):
+    def get_pitches(cls, category):
+        pitches = Pitch.query.filter_by(pitch_category=category).all()
+        return pitches
+        # response = []
 
-        response = []
+        # for pitch in cls.all_pitches:
+        #     if pitch.pitch_title == pitch_title:
+        #         response.append(pitch)
 
-        for pitch in cls.all_pitches:
-            if pitch.pitch_title == pitch_title:
-                response.append(pitch)
-
-        return response
+        # return response
 
     # @classmethod
     # def displayPitches():
+# class Comments(db.Model):
+#     """
+#     comment model for each pitch 
+#     """
+#     __tablename__ = 'comments'
+
+#     # add columns
+#     id = db.Column(db.Integer, primary_key=True)
+#     opinion = db.Column(db.String(255))
+#     time_posted = db.Column(db.DateTime, default=datetime.utcnow)
+#     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+#     pitches_id = db.Column(db.Integer, db.ForeignKey("pitches.id"))
+
+#     def save_comment(self):
+#         db.session.add(self)
+#         db.session.commit()
+
+#     @classmethod
+#     def get_comments(self, id):
+#         comment = Comments.query.order_by(
+#             Comments.time_posted.desc()).filter_by(pitches_id=id).all()
+#         return comment
 
 
 
