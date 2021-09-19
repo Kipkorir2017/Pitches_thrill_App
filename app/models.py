@@ -60,11 +60,11 @@ class Pitch(db.Model):
 
 
 
-    all_pitches=[]
-    def __init__(self,pitch_id,pitch_title,postedOn):
-        self.pitch_id=pitch_id
-        self.pitch_title=pitch_title
-        self.postedOn=postedOn
+    # all_pitches=[]
+    # def __init__(self,pitch_id,pitch_title,postedOn):
+    #     self.pitch_id=pitch_id
+    #     self.pitch_title=pitch_title
+    #     self.postedOn=postedOn
         
         
     def save_pitch(self):

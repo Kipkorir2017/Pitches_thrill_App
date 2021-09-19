@@ -4,7 +4,7 @@ from . import main
 from wtforms import form
 from .forms import PitchesForm,UpdateProfile
 from ..models import Pitch,User
-from flask_login import login_required
+from flask_login import login_required,current_user
 from .. import db,photos
 
 #views
@@ -13,6 +13,8 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
+    all_pitches=Pitch.query.order_by('id').all()
+    print(all_pitches)
     title='Pitches Thrills'
     return render_template('index.html',title=title)
 
@@ -66,13 +68,16 @@ def update_pic(uname):
 def new_pitch():
     form = PitchesForm()
     if form.validate_on_submit():
-        pitch_title = form.pitch_title.data
-        pitch_category = form.pitch_category.data
-        pitch_comment = form.pitch_comment.data
+        title = form.pitch_title.data
+        category = form.pitch_category.data
+        comment = form.pitch_comment.data
        
 
         #update pitch instance
-        new_pitch = Pitch(pitch_title,pitch_category,pitch_comment)
+        new_pitch = Pitch(pitch_title=title,
+                          pitch_category=category,
+                          pitch_comment=comment,
+                          user=current_user)
                           
                           
 
