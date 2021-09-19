@@ -3,7 +3,7 @@ from flask import render_template,redirect,request, url_for,abort
 from . import main
 from wtforms import form
 from .forms import PitchesForm,UpdateProfile
-from ..models import Pitch,User
+from ..models import Pitch,User, Comments
 from flask_login import login_required,current_user
 from .. import db,photos
 
