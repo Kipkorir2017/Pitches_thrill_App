@@ -6,8 +6,8 @@
             <div class="well well-lg p-5" style="text-align: left;">
                 <h3 style="font-weight: 900;">{{pitch.pitch_title}}</h3>
                 <p>{{pitch.pitch_comment|truncate(70)}}</p>
-                <p style="font-weight: 900; "><span>Posted on:{{pitch.postedOn.date}} by
-                         </span> <span>
+                <p style="font-weight: 900; "><span>Posted on: {{pitch.posted.strftime('%d.%m.%Y')}} by :
+                </span> {{pitch.user.username}} <span>
                     </span>
                 </p>
     

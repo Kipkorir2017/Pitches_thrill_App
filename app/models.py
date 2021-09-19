@@ -17,21 +17,24 @@ class User(UserMixin,db.Model):
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255))
     email = db.Column(db.String(255),unique = True,index = True)
+    password_hash = db.Column(db.String(255))
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
-    pass_hash = db.Column(db.String(255))
+    pitches = db.relationship("Pitch", backref="user", lazy="dynamic")
+    comment = db.relationship("Comments", backref="user", lazy="dynamic")
+    
 
+  
     @property
     def password(self):
-        raise AttributeError('You cannot read the password attribute')
+        raise AttributeError("You cant always get it right")
 
     @password.setter
     def password(self, password):
-        self.pass_hash = generate_password_hash(password)
+        self.password_hash = generate_password_hash(password)
 
-
-    def verify_password(self,password):
-        return check_password_hash(self.pass_hash,password)
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
     
     def __repr__(self):
         return f'User {self.username}'
@@ -52,6 +55,7 @@ class Pitch(db.Model):
     pitch_category = db.Column(db.String)
     pitch_comment = db.Column(db.String)
     posted = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id")) 
 
 
 
@@ -74,38 +78,29 @@ class Pitch(db.Model):
     def get_pitches(cls, category):
         pitches = Pitch.query.filter_by(pitch_category=category).all()
         return pitches
-        # response = []
+ 
+class Comments(db.Model):
+    """
+    comment model for each pitch 
+    """
+    __tablename__ = 'comments'
 
-        # for pitch in cls.all_pitches:
-        #     if pitch.pitch_title == pitch_title:
-        #         response.append(pitch)
+    # add columns
+    id = db.Column(db.Integer, primary_key=True)
+    opinion = db.Column(db.String(255))
+    time_posted = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    pitches_id = db.Column(db.Integer, db.ForeignKey("pitches.id"))
 
-        # return response
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
 
-    # @classmethod
-    # def displayPitches():
-# class Comments(db.Model):
-#     """
-#     comment model for each pitch 
-#     """
-#     __tablename__ = 'comments'
-
-#     # add columns
-#     id = db.Column(db.Integer, primary_key=True)
-#     opinion = db.Column(db.String(255))
-#     time_posted = db.Column(db.DateTime, default=datetime.utcnow)
-#     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-#     pitches_id = db.Column(db.Integer, db.ForeignKey("pitches.id"))
-
-#     def save_comment(self):
-#         db.session.add(self)
-#         db.session.commit()
-
-#     @classmethod
-#     def get_comments(self, id):
-#         comment = Comments.query.order_by(
-#             Comments.time_posted.desc()).filter_by(pitches_id=id).all()
-#         return comment
+    @classmethod
+    def get_comments(self, id):
+        comment = Comments.query.order_by(
+            Comments.time_posted.desc()).filter_by(pitches_id=id).all()
+        return comment
 
 
 
