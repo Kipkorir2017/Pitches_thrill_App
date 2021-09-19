@@ -24,10 +24,10 @@ Some Modules need to be upgraded others need to be downgraded
 
 2. Open project using  the terminal, go to the project directory and run the following commands: chmod +x run.py and ./start.sh respectively to launch the program.
 ## Technologies Used
-HTML5 & CSS
-Flask
-Python 3.8
-Bootstrap
+* HTML5 & CSS
+* Flask
+* Python 3.8
+* Bootstrap
 
 ## Known Bugs
 There are no known bugs at the moment, report more bugs by contacting me.
